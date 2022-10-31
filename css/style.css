@@ -1,0 +1,64 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+body {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    align-content: center;
+}
+
+
+
+h1 {
+
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    border-color: blueviolet;
+    border: solid;
+}
+#telagame {
+   
+    width: 800px;
+    height: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    border: solid;
+    background-image: url("./assets/fundo.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    /*background-color: transparent;*/
+  }
+
+  #nave {
+    width: 90px;
+    height: 80px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    border: solid;
+
+  }
+
+  #asteroid {
+
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    border: solid;
+
+  }
