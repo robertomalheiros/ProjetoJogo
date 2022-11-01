@@ -88,11 +88,49 @@ function Barreiras(altura, largura, abertura, espaco, notificarPonto){
     }
 
 }
+
+
+/*RECEBENDO TECLAS
+document.addEventListener("keyup", (e) => {
+	console.log(e.code)
+});
+*/
+
+function Nave(alturaJogo){
+
+    let voando = false
+    this.elemento = novoElemento('img', 'nave')
+    this.elemento.src = "./assets/nave1.gif" 
+
+    this.getY = () => parseInt(this.elemento.style.bottom.split('px')[0])
+    this.setY = y => this.elemento.style.bottom = `${y}px`
+
+    window.onkeydown = e => voando = true
+    window.onkeyup = e => voando = false
+
+    this.animar = () => {
+        const novoY = this.getY() + (voando ? 8 : -5)
+        const alturaMaxima = alturaJogo - this.elemento.clientHeight
+
+        if(novoY <= 0){
+            this.setY(0)    
+        }else if (novoY >= alturaMaxima){
+            this.setY(alturaMaxima)    
+        }else {
+            this.setY(novoY)
+        }
+    }
+    this.setY(alturaJogo / 2)
+}
+//TESTANDO MOVIMENTO
 const barreiras = new Barreiras(700, 1200, 200, 400)
 const area = document.querySelector('#telagame')
-console.log(barreiras)
 barreiras.grupo.forEach(bar => area.appendChild(bar.elemento))
+const nave = new Nave(700)
+area.appendChild(nave.elemento)
+
 
 setInterval(() => {
     barreiras.animar()
+    nave.animar()
 }, 20)

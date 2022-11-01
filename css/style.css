@@ -45,11 +45,11 @@ body {
     background-color: transparent;*/
   }
 
-  #nave {
-    width: 90px;
+  .nave {
     position: absolute;
+    width: 100px;
     left: calc(50% - 30px);
-    bottom: 50%;
+
   }
 
 .asteroideIMG {
