@@ -19,7 +19,7 @@ function Asteroide(reversa = false){
     //INSERINDO A IMG DENTRO DA DIV BARREIRA
     this.elemento.appendChild(imagem)
     this.setAltura = altura => imagem.style.top = `${altura}px`
-    console.log(this.setAltura())
+
 }
 
 //CHAMANDO TESTE DE ELEMENTOS
@@ -45,8 +45,6 @@ function ParDeAsteroides(altura, abertura, x){
         //this.superior.setAltura(alturaSuperior)
         //this.inferior.setAltura(alturaInferior)
         const posicao = Math.random() * (altura - abertura)
-        console.log(posicao)
-
         this.meio.setAltura(posicao)
     }
 
@@ -58,6 +56,42 @@ function ParDeAsteroides(altura, abertura, x){
   }
 
 //TESTANDO PARES DE ASTEROIDES
-const b = new ParDeAsteroides(700, 300, 600)
-console.log(b.elemento)
-document.querySelector('#telagame').appendChild(b.elemento)
+//const b = new ParDeAsteroides(700, 300, 600)
+//console.log(b.elemento)
+//document.querySelector('#telagame').appendChild(b.elemento)
+function Barreiras(altura, largura, abertura, espaco, notificarPonto){
+
+    this.grupo = [
+        new ParDeAsteroides(altura, abertura, largura),
+        new ParDeAsteroides(altura, abertura, largura + espaco),
+        new ParDeAsteroides(altura, abertura, largura + abertura * 2),
+        new ParDeAsteroides(altura, abertura, largura + abertura * 3 )
+    ]
+
+    const deslocamento = 3
+    this.animar = () => {
+        this.grupo.forEach(bar => {
+            bar.setX(bar.getX() - deslocamento)
+
+            //elemento saindo da tela
+            if(bar.getX() < -bar.getLargura()){
+                bar.setX(bar.getX() + espaco * this.grupo.length)
+                bar.sortearAbertura()
+            }
+
+            const cmeio = largura / 2 
+            const cruzou = bar.getX() + deslocamento >= cmeio &&
+            bar.getX() < cmeio
+            if(cruzou) notificarPonto()
+        })
+    }
+
+}
+const barreiras = new Barreiras(700, 1200, 200, 400)
+const area = document.querySelector('#telagame')
+console.log(barreiras)
+barreiras.grupo.forEach(bar => area.appendChild(bar.elemento))
+
+setInterval(() => {
+    barreiras.animar()
+}, 20)
