@@ -14,7 +14,7 @@ function novoElemento(tagName, className, src = false){
     return elem}
 
 function Barreira(reversa = false){
-    const images = ['./assets/0.png', './assets/1.png', './assets/2.png']
+    const images = ['./assets/1.png', './assets/2.png', './assets/3.png']
     let ind = parseInt(Math.random() * images.length)
     this.elemento = novoElemento('div', 'barreira')
     const imagem = novoElemento('img', 'barreiraIMG')
