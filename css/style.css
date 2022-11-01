@@ -52,14 +52,14 @@ body {
     bottom: 50%;
   }
 
-.barreiraIMG {
+.asteroideIMG {
 
     width: 300px;
     height: 300px;
     /*border: solid;*/
 
   }
-  .par-barreiras{
+  .par-asteroides{
 
     position: absolute;
     top: 0;
@@ -70,7 +70,7 @@ body {
 
   }
 
-  .barreira {
+  .asteroide {
 
     display: flex;
     flex-direction: column;
