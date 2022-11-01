@@ -9,7 +9,8 @@ function novoElemento(tagName, className, src = false){
 //CRIANDO BARREIRAS A PARTIR DOS ELEMENTOS CRIANDO DA FUNÇÃO "novoElemento()"
 function Asteroide(reversa = false){
     //LISTA ALEATORIA
-    const images = ['./assets/1.png', './assets/2.png', './assets/3.png']
+    const images = ['./assets/1.png', './assets/2.png', './assets/3.png',
+     './assets/4.png', './assets/5.png', './assets/6.png']
     let ind = parseInt(Math.random() * images.length)
     //DEFININDO A DIV ASTEROIDE
     this.elemento = novoElemento('div', 'asteroide')
@@ -64,8 +65,8 @@ function Barreiras(altura, largura, abertura, espaco, notificarPonto){
     this.grupo = [
         new ParDeAsteroides(altura, abertura, largura),
         new ParDeAsteroides(altura, abertura, largura + espaco),
-        new ParDeAsteroides(altura, abertura, largura + abertura * 2),
-        new ParDeAsteroides(altura, abertura, largura + abertura * 3 )
+        new ParDeAsteroides(altura, abertura, largura + espaco * 2),
+        new ParDeAsteroides(altura, abertura, largura + espaco * 3 )
     ]
 
     const deslocamento = 3
