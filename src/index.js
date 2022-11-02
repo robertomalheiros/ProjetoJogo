@@ -179,9 +179,8 @@ function IronNave(){
 
             asteroides.animar()
             nave.animar()
-            let prog = document.getElementsByClassName('.progresso')
-
-            console.log(prog.innerHTML)
+            //let prog = document.getElementsByClassName('.progresso')
+            //console.log(prog.innerHTML)
             //PARANDO TEMPORIZADOR
             if(colisao(nave, asteroides)){
                 clearInterval(temp)

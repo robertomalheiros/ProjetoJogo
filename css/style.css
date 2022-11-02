@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Bungee+Spice&display=swap');
 *{
     box-sizing: border-box; /* CÁLCULO AUTOMÁTICO DE BOX VERIFIQUE ANTES */
 }
@@ -10,21 +11,31 @@ body {
     align-items: center;
     flex-direction: column;
     align-content: center;
-    background-color: rgb(15, 103, 166);
+    background-color: #090827;
+    font-family: 'Bungee Shade', cursive;
 }
 
 h1 {
+    font-family: 'Bungee Shade', cursive;
     color: aliceblue;
+    font-size: 50px;
+    padding: 10px;
+    margin: 10px;
 }
 
 #telagame {
     margin: 15px;
     width: 1200px;
     height: 700px;
-    border-color:5px solid blue;
+    border-color:5px solid rgb(72, 10, 94);
     position: relative;
     overflow: hidden;
     background-color: transparent;
+    border-radius: 24px;
+    background: #27272b;
+    box-shadow:  -14px 14px 23px #1c1c1f, 14px -14px 23px #323237;
+
+
 }
 
 .nave {
@@ -69,7 +80,13 @@ h1 {
 .butoes{
 
     display: flex;
+    font-family: 'Bungee Spice', cursive;
+    font-size: 10px;
     flex-direction: row;
     justify-content: space-between;
-
+    color: aliceblue;
+    font-size: large;
+    border-radius: 30px;
+    background: #1a0326;
+    box-shadow:  -8px 8px 7px #14021d, 8px -8px 7px #20042f;
 }
