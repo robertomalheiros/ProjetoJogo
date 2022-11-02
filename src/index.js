@@ -1,5 +1,3 @@
-
-
 //CRIANDO ELEMENTOS
 
 function novoElemento(tagName, className, src = false){
@@ -33,7 +31,6 @@ function GrupoAsteroides(altura, abertura, x){
         this.meio.setPosicao(posicao)
     }
 
-
     // PEGANDO A POSIÇÃO DE X
     this.getX = () => parseInt(this.elemento.style.left.split('px')[0]) 
     //SETANDO A POSIÇÃO DO ELEMENTO 
@@ -45,7 +42,6 @@ function GrupoAsteroides(altura, abertura, x){
     //SETANDO A POSIÇÃO DE X
     this.setX(x)
   }
-
 
 function Asteroides(altura, largura, abertura, espaco, notificarPonto){
 
@@ -78,19 +74,10 @@ function Asteroides(altura, largura, abertura, espaco, notificarPonto){
             const cmeio = largura / 2 
             const cruzou = ast.getX() + deslocamento >= cmeio &&
             ast.getX() < cmeio
-            if(cruzou) notificarPonto()
-            
+            if(cruzou) notificarPonto()  
         })
     }
-
 }
-
-
-/*RECEBENDO TECLAS
-document.addEventListener("keyup", (e) => {
-	console.log(e.code)
-});
-*/
 
 function Nave(alturaJogo){
 
@@ -123,8 +110,7 @@ function Progresso(){
 
     this.elemento = novoElemento('span', 'progresso')
     this.atualizarPontos = pontos => {
-    this.elemento.innerHTML = pontos
-    }
+    this.elemento.innerHTML = pontos}
     this.atualizarPontos(0)
 
 }

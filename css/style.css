@@ -13,13 +13,10 @@ body {
     background-color: rgb(15, 103, 166);
 }
 
-
-
 h1 {
-
     color: aliceblue;
-
 }
+
 #telagame {
     margin: 15px;
     width: 1200px;
@@ -28,35 +25,15 @@ h1 {
     position: relative;
     overflow: hidden;
     background-color: transparent;
+}
 
- 
-
-
-    /*
-      display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    border: solid;
-    background-color: transparent;*/
-  }
-
-  .nave {
+.nave {
     position: absolute;
     width: 100px;
     left: calc(50% - 30px);
+}
 
-  }
-
-.asteroideIMG {
-
-    position:absolute;
-    width: 300px;
-    height: 300px;
-    /*border: solid;*/
-
-  }
-  .asteroides{
+.asteroides{
 
     position: absolute;
     top: 0;
@@ -64,10 +41,9 @@ h1 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
 
-  }
-
-  .asteroide {
+.asteroide {
 
     display: flex;
     position:absolute;
@@ -76,13 +52,13 @@ h1 {
     width: 200px;
     height: 200px;
 
-  }
+}
   
-  .progresso {
+.progresso {
     position: absolute;
     top: 10px;
     right: 10px;
     font-size: 70px;
     z-index: 100;
     color: aliceblue;
-  }
+}
