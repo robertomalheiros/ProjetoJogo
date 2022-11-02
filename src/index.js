@@ -26,11 +26,11 @@ function Asteroide(reversa = false){
 
   //DEFININDO OS GRUPO DE ASTEROIDES
 function GrupoAsteroides(altura, abertura, x){
-    this.elemento = novoElemento('div', 'par-asteroides')
+    this.elemento = novoElemento('div', 'asteroides')
 //Criando asteroide
     this.meio = new Asteroide()
 
-//Adcionando elementos dentro de par-asteroides
+//Adcionando elementos dentro da class .asteroides
     this.elemento.appendChild(this.meio.elemento)
 //Função para sortear a abertura entre os asteroides
     this.sortearAbertura = () => {
@@ -38,10 +38,16 @@ function GrupoAsteroides(altura, abertura, x){
         this.meio.setAltura(posicao)
     }
 
-    this.getX = () => parseInt(this.elemento.style.left.split('px')[0])
+
+    // PEGANDO A POSIÇÃO DE X
+    this.getX = () => parseInt(this.elemento.style.left.split('px')[0]) 
+    //SETANDO A POSIÇÃO DO ELEMENTO 
     this.setX = x => this.elemento.style.left = `${x}px`
+    //BUSCANDO O A LARGURA DA TELA
     this.getLargura = () => this.elemento.clientWidth
+    //SORTEANDO A ABERTURA INICIAL DOS ASTEROIDES
     this.sortearAbertura()
+    //SETANDO A POSIÇÃO DE X
     this.setX(x)
   }
 
@@ -56,20 +62,27 @@ function Asteroides(altura, largura, abertura, espaco, notificarPonto){
     ]
 
     const deslocamento = 3
+    //ANIMANDO OS ASTEROIDES
     this.animar = () => {
+        //FAZENDO UM FOR NAS INSTÂNCIAS 
         this.grupo.forEach(ast => {
+            //SETANDO UMA NOVA POSIÇÃO PARA CADA INSTÂNCIA(ASTEROIDE)
+            //POSIÇÃO ATUAL MENOS O DESLOCAMENTO 
             ast.setX(ast.getX() - deslocamento)
-
-            //elemento saindo da tela
+            
+            //MOVENDO O ASTEROIDE QUE SAIU
             if(ast.getX() < -ast.getLargura()){
+// JOGANDO O ASTEROIDE PARA O INICIO X + ESPAÇO(EM PIXELS) * O NÚMERO DE ELEMENTOS DO GRUPO
                 ast.setX(ast.getX() + espaco * this.grupo.length)
+                //SORTEANDO A NOVA ORDEM DOS ASTEROIDES
                 ast.sortearAbertura()
             }
-
+            //CALCULA SE O ASTEROIDE CRUZOU O MEIO
             const cmeio = largura / 2 
             const cruzou = ast.getX() + deslocamento >= cmeio &&
             ast.getX() < cmeio
             if(cruzou) notificarPonto()
+            
         })
     }
 
@@ -124,7 +137,8 @@ function IronNave(){
     let pontos = 0
     const area = document.querySelector('#telagame')
     const altura = area.clientHeight
-    const largura = area.clientLeft
+    const largura = area.clientWidth
+    console.log(altura)
     const progresso = new Progresso()
     const asteroides = new Asteroides(altura, largura, 200, 400, 
         () => progresso.atualizarPontos(++pontos)   )
