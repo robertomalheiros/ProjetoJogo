@@ -8,7 +8,8 @@ function novoElemento(tagName, className, src = false){
 function Asteroide(reversa = false){
     //LISTA ALEATORIA
     const images = ['./assets/1.png', './assets/2.png', './assets/3.png',
-     './assets/4.png', './assets/5.png', './assets/6.png']
+     './assets/4.png', './assets/5.png', './assets/7.png', './assets/8.png', 
+     './assets/9.png', './assets/10.png']
     let ind = parseInt(Math.random() * images.length)
     //DEFININDO A DIV ASTEROIDE
     this.elemento = novoElemento('img', 'asteroide')
@@ -52,9 +53,12 @@ function Asteroides(altura, largura, abertura, espaco, notificarPonto){
         new GrupoAsteroides(altura, abertura, largura + espaco * 3),
         new GrupoAsteroides(altura, abertura, largura + espaco * 4),
         new GrupoAsteroides(altura, abertura, largura + espaco * 5),
+        new GrupoAsteroides(altura, abertura, largura + espaco * 6),
+        new GrupoAsteroides(altura, abertura, largura + espaco * 7),
+        new GrupoAsteroides(altura, abertura, largura + espaco * 8),
     ]
 
-    const deslocamento = 3
+    const deslocamento = 4
 //ANIMANDO OS ASTEROIDES
     this.animar = () => {
         //FAZENDO UM FOR NAS INSTÂNCIAS 
@@ -98,6 +102,7 @@ function Nave(alturaJogo){
         if(novoY <= 0){
             this.setY(0)    
         }else if (novoY >= alturaMaxima){
+
             this.setY(alturaMaxima)    
         }else {
             this.setY(novoY)
@@ -122,21 +127,14 @@ function Sobreposicao(elemA, elemB){
 
     //DEFININDO DISTANCIA A DIREITA, LARGURA E ALTURA DE A E B 
     const aEsquerdaA = caixaA.left
-    //console.log(aEsquerdaA)
     const laguraCaixaA = caixaA.width
-    //console.log(laguraCaixaA)
     const aEsquerdaB = caixaB.left
-    //console.log(aEsquerdaB) 
     const larguraCaixaB = caixaB.width
-    //console.log(larguraCaixaB)
     const aCimaA = caixaA.top
-    //console.log(aCimaA)
     const alturaCaixaA = caixaA.height
-    //console.log(alturaCaixaA)
     const aCimaB = caixaB.top
-    console.log(aCimaB) 
     const alturaCaixaB = caixaB.height
-    console.log(alturaCaixaB)
+
 
     //DEFININDO SOBREPOSICAO
     const horizontal = aEsquerdaA + laguraCaixaA >= aEsquerdaB &&
@@ -149,6 +147,7 @@ function Sobreposicao(elemA, elemB){
 function colisao(nave, asteroides){
 
     let colidiu = false
+
     asteroides.grupo.forEach(asteroides => {
         //SE NÃO COLIDIU AINDA     
         if(!colidiu){
@@ -166,7 +165,7 @@ function IronNave(){
     const altura = area.clientHeight
     const largura = area.clientWidth
     const progresso = new Progresso()
-    const asteroides = new Asteroides(altura, largura, 200, 400, 
+    const asteroides = new Asteroides(altura, largura, 50, 300, 
         () => progresso.atualizarPontos(++pontos)   )
     
     const nave = new Nave(altura)
@@ -180,9 +179,15 @@ function IronNave(){
 
             asteroides.animar()
             nave.animar()
+            let prog = document.getElementsByClassName('.progresso')
+
+            console.log(prog.innerHTML)
             //PARANDO TEMPORIZADOR
             if(colisao(nave, asteroides)){
                 clearInterval(temp)
+                const audio = new Audio('./assets/batida2.mp3')
+                audio.play()
+                //alert('Game Over!!')
             }
 
             }, 20)
