@@ -13,16 +13,11 @@ function Asteroide(reversa = false){
      './assets/4.png', './assets/5.png', './assets/6.png']
     let ind = parseInt(Math.random() * images.length)
     //DEFININDO A DIV ASTEROIDE
-    this.elemento = novoElemento('div', 'asteroide')
-    //DEFININDO A IMG DENTRO DE ASTEROIDE
-    const imagem = novoElemento('img', 'asteroideIMG')
-    imagem.src = images[ind]
-    //INSERINDO A IMG DENTRO DA DIV 
-    this.elemento.appendChild(imagem)
-    this.setAltura = altura => imagem.style.top = `${altura}px`
+    this.elemento = novoElemento('img', 'asteroide')
+    this.elemento.src = images[ind]
+    this.setPosicao = posicao => this.elemento.style.top = `${posicao}px`
 
 }
-
 
   //DEFININDO OS GRUPO DE ASTEROIDES
 function GrupoAsteroides(altura, abertura, x){
@@ -35,7 +30,7 @@ function GrupoAsteroides(altura, abertura, x){
 //Função para sortear a abertura entre os asteroides
     this.sortearAbertura = () => {
         const posicao = Math.random() * (altura - abertura)
-        this.meio.setAltura(posicao)
+        this.meio.setPosicao(posicao)
     }
 
 
@@ -58,16 +53,18 @@ function Asteroides(altura, largura, abertura, espaco, notificarPonto){
         new GrupoAsteroides(altura, abertura, largura),
         new GrupoAsteroides(altura, abertura, largura + espaco),
         new GrupoAsteroides(altura, abertura, largura + espaco * 2),
-        new GrupoAsteroides(altura, abertura, largura + espaco * 3 )
+        new GrupoAsteroides(altura, abertura, largura + espaco * 3),
+        new GrupoAsteroides(altura, abertura, largura + espaco * 4),
+        new GrupoAsteroides(altura, abertura, largura + espaco * 5),
     ]
 
     const deslocamento = 3
-    //ANIMANDO OS ASTEROIDES
+//ANIMANDO OS ASTEROIDES
     this.animar = () => {
         //FAZENDO UM FOR NAS INSTÂNCIAS 
         this.grupo.forEach(ast => {
-            //SETANDO UMA NOVA POSIÇÃO PARA CADA INSTÂNCIA(ASTEROIDE)
-            //POSIÇÃO ATUAL MENOS O DESLOCAMENTO 
+//SETANDO UMA NOVA POSIÇÃO PARA CADA INSTÂNCIA(ASTEROIDE)
+//POSIÇÃO ATUAL MENOS O DESLOCAMENTO 
             ast.setX(ast.getX() - deslocamento)
             
             //MOVENDO O ASTEROIDE QUE SAIU
@@ -77,7 +74,7 @@ function Asteroides(altura, largura, abertura, espaco, notificarPonto){
                 //SORTEANDO A NOVA ORDEM DOS ASTEROIDES
                 ast.sortearAbertura()
             }
-            //CALCULA SE O ASTEROIDE CRUZOU O MEIO
+//CALCULA SE O ASTEROIDE CRUZOU O MEIO
             const cmeio = largura / 2 
             const cruzou = ast.getX() + deslocamento >= cmeio &&
             ast.getX() < cmeio
@@ -132,13 +129,58 @@ function Progresso(){
 
 }
 
+function Sobreposicao(elemA, elemB){
+    //BUSCANDO A CAIXA RETANGULAR DOS DOIS ELEMENTOS
+    const caixaA = elemA.getBoundingClientRect()
+    const caixaB = elemB.getBoundingClientRect()
+
+    //DEFININDO DISTANCIA A DIREITA, LARGURA E ALTURA DE A E B 
+    const aEsquerdaA = caixaA.left
+    //console.log(aEsquerdaA)
+    const laguraCaixaA = caixaA.width
+    //console.log(laguraCaixaA)
+    const aEsquerdaB = caixaB.left
+    //console.log(aEsquerdaB) 
+    const larguraCaixaB = caixaB.width
+    //console.log(larguraCaixaB)
+    const aCimaA = caixaA.top
+    //console.log(aCimaA)
+    const alturaCaixaA = caixaA.height
+    //console.log(alturaCaixaA)
+    const aCimaB = caixaB.top
+    console.log(aCimaB) 
+    const alturaCaixaB = caixaB.height
+    console.log(alturaCaixaB)
+
+    //DEFININDO SOBREPOSICAO
+    const horizontal = aEsquerdaA + laguraCaixaA >= aEsquerdaB &&
+        aEsquerdaB + larguraCaixaB >= aEsquerdaA
+    const vertical = aCimaA + alturaCaixaA >= aCimaB &&
+        aCimaB + alturaCaixaB >= aCimaA
+    return horizontal && vertical        
+}
+
+function colisao(nave, asteroides){
+
+    let colidiu = false
+    asteroides.grupo.forEach(asteroides => {
+        //SE NÃO COLIDIU AINDA
+        console.log('')
+        
+        if(!colidiu){
+            const asteroideA = asteroides.meio.elemento
+            colidiu = Sobreposicao(nave.elemento, asteroideA)
+        }
+    })
+    return colidiu
+}
+
 function IronNave(){
 
     let pontos = 0
     const area = document.querySelector('#telagame')
     const altura = area.clientHeight
     const largura = area.clientWidth
-    console.log(altura)
     const progresso = new Progresso()
     const asteroides = new Asteroides(altura, largura, 200, 400, 
         () => progresso.atualizarPontos(++pontos)   )
@@ -154,10 +196,16 @@ function IronNave(){
 
             asteroides.animar()
             nave.animar()
+            //PARANDO TEMPORIZADOR
+            if(colisao(nave, asteroides)){
+                clearInterval(temp)
+            }
+
             }, 20)
     }
 
 }
 
 new IronNave().start()
+
 
