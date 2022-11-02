@@ -173,7 +173,7 @@ function IronNave(){
     area.appendChild(nave.elemento)
     area.appendChild(progresso.elemento)
     asteroides.grupo.forEach(ast => area.appendChild(ast.elemento))
-    
+    const audio = new Audio('./assets/batida.mp3')
     this.start = () => {
         const temp = setInterval(() => {
 
@@ -184,7 +184,6 @@ function IronNave(){
             //PARANDO TEMPORIZADOR
             if(colisao(nave, asteroides)){
                 clearInterval(temp)
-                const audio = new Audio('./assets/batida2.mp3')
                 audio.play()
                 //alert('Game Over!!')
             }
@@ -196,4 +195,22 @@ function IronNave(){
 
 new IronNave().start()
 
+
+const trilha = new Audio('./assets/trilha.mp3')
+
+let playmusic = document.querySelector("#playmusic")
+let stopmusic = document.querySelector("#stopmusic")
+
+playmusic.addEventListener("click", () => {
+    clearInterval()
+    trilha.play()
+    setTimeout(trilha.play(), 240000)
+    stopmusic.style.display = "flex";
+    playmusic.style.display = "none";
+});
+stopmusic.addEventListener("click", () => {
+    trilha.pause()
+    playmusic.style.display = "flex";
+    stopmusic.style.display = "none";
+});
 

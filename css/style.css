@@ -90,3 +90,8 @@ h1 {
     background: #1a0326;
     box-shadow:  -8px 8px 7px #14021d, 8px -8px 7px #20042f;
 }
+
+#stopmusic{
+
+    display: none;
+}
