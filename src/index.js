@@ -164,9 +164,7 @@ function colisao(nave, asteroides){
 
     let colidiu = false
     asteroides.grupo.forEach(asteroides => {
-        //SE NÃO COLIDIU AINDA
-        console.log('')
-        
+        //SE NÃO COLIDIU AINDA     
         if(!colidiu){
             const asteroideA = asteroides.meio.elemento
             colidiu = Sobreposicao(nave.elemento, asteroideA)
