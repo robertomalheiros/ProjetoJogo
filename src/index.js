@@ -179,13 +179,19 @@ function IronNave(){
 
             asteroides.animar()
             nave.animar()
-            //let prog = document.getElementsByClassName('.progresso')
-            //console.log(prog.innerHTML)
             //PARANDO TEMPORIZADOR
             if(colisao(nave, asteroides)){
                 clearInterval(temp)
                 audio.play()
-                //alert('Game Over!!')
+                setTimeout(() => {
+                    alert('Game Over!!')
+                    
+                }, 200)
+                setTimeout(() => {
+                    document.location.reload(true);
+                    
+                }, 1000)
+                
             }
 
             }, 20)
@@ -193,7 +199,14 @@ function IronNave(){
 
 }
 
-new IronNave().start()
+
+let playgame = document.querySelector("#play")
+
+playgame.addEventListener("click", () => {
+    new IronNave().start()
+    playgame.style.display = "none";
+
+});
 
 
 const trilha = new Audio('./assets/trilha.mp3')
